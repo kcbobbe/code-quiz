@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Code Quiz</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  </head>
+  <body>
+    <main>
+
+      <header>
+        <div id="countdown" class="text-align:right">Time Remaining: 60 seconds</div>
+      </header>
+
+      <div class="container" id="welcomeScreen">
+        <h1>Code Quiz</h1>
+        <button type="button" class="btn btn-primary" id="startButton">Click to start countdown</button>
+      </div>
+
+      <div class="container" id="quizScreen" style="display:none">
+        <h1>Code Quiz</h1>
+        <div id="codeQuestion"></div>
+        <div id="answerButtons">
+          <button type="button" class="btn btn-primary" id="0"></button>
+          <button type="button" class="btn btn-primary" id="1"></button>
+          <button type="button" class="btn btn-primary" id="2"></button>
+          <button type="button" class="btn btn-primary" id="3"></button>
+        </div>
+        <div id="flashFeedback"></div>
+  
+      </div>
+      <div class="container" id="endOfQuiz" style="display:none">
+        <h1 id="playerScore"></h1>
+        <div>test</div>
+      </div>
+
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
