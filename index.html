@@ -9,30 +9,44 @@
   <body>
     <main>
 
-      <header>
-        <div id="countdown" class="text-align:right">Time Remaining: 60 seconds</div>
+      <header style="margin-bottom: 3em;">
+        <nav class= "navbar navbar-light bg-light" style="border-bottom:3px solid darkgray;">
+          <h1>Code Quiz</h1>
+          <div id="countdown" class="text-align:right">Time Remaining: 60 seconds</div>
+        </nav>
+        <div class="alert alert-success" id="flashFeedbackTrue" style="display:none" role="alert">
+          You were right!
+        </div>
+        <div class="alert alert-danger" id="flashFeedbackFalse" style="display:none" role="alert">
+          You were wrong!
+        </div>
       </header>
 
-      <div class="container" id="welcomeScreen">
-        <h1>Code Quiz</h1>
-        <button type="button" class="btn btn-primary" id="startButton">Click to start countdown</button>
+      <div class="container" id="welcomeScreen" style="display:block; background-color:gray;">
+        <button type="button" class="btn btn-success btn-lg btn-block" id="startButton">Click to start countdown</button>
       </div>
 
-      <div class="container" id="quizScreen" style="display:none">
-        <h1>Code Quiz</h1>
-        <div id="codeQuestion"></div>
+      <div class="container" id="quizScreen" style="display:none;">
+        <h2 id="codeQuestion" style="text-align: center; padding: .25em; margin-bottom: .5em; border-bottom: 2px solid darkgray;"></h2>
         <div id="answerButtons">
-          <button type="button" class="btn btn-primary" id="0"></button>
-          <button type="button" class="btn btn-primary" id="1"></button>
-          <button type="button" class="btn btn-primary" id="2"></button>
-          <button type="button" class="btn btn-primary" id="3"></button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="0"></button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="1"></button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="2"></button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="3"></button>
         </div>
-        <div id="flashFeedback"></div>
-  
       </div>
-      <div class="container" id="endOfQuiz" style="display:none">
+
+
+      <div class="container" id="endOfQuiz" style="display:none; background-color:gray;">
         <h1 id="playerScore"></h1>
-        <div>test</div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="inputInitials" placeholder="Your Initials" aria-label="Your Initials">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button" id="inputInitialsButton">OK</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-success btn-lg" id="playAgain">Play again</button>
+        <button type="button" class="btn btn-secondary btn-lg" id="viewHighScores">View High Scores</button>
       </div>
 
     </main>
