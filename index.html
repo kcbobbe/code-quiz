@@ -9,44 +9,55 @@
   <body>
     <main>
 
-      <header style="margin-bottom: 3em;">
-        <nav class= "navbar navbar-light bg-light" style="border-bottom:3px solid darkgray;">
+      <header style="margin-bottom: 3em">
+        <nav class= "navbar navbar-light" style="border-bottom:3px solid darkgray; background-color: #eeeeee">
           <h1>Code Quiz</h1>
           <div id="countdown" class="text-align:right">Time Remaining: 60 seconds</div>
         </nav>
-        <div class="alert alert-success" id="flashFeedbackTrue" style="display:none" role="alert">
-          You were right!
+        <div style="height:50px;">
+          <div class="alert alert-success" id="flashFeedbackTrue" style="display:none" role="alert">
+            You were right!
+          </div>
+          <div class="alert alert-danger" id="flashFeedbackFalse" style="display:none" role="alert">
+            You were wrong!
+          </div>
         </div>
-        <div class="alert alert-danger" id="flashFeedbackFalse" style="display:none" role="alert">
-          You were wrong!
-        </div>
+        
       </header>
 
-      <div class="container" id="welcomeScreen" style="display:block">
-        <div class="card">
-          <!-- Photo by Danial RiCaRoS on Unsplash -->
-          <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="card-img-top" title="Photo by Danial RiCaRoS on Unsplash" alt="Photo by Danial RiCaRoS on Unsplash">
-          <div class="card-body">
-            <h5 class="card-title">JavaScript Quiz</h5>
-            <p class="card-text">Do you think you are ready for a technical interview? Test your JavaScript knowledge!</p>
-            <button type="button" class="btn btn-secondary btn-lg btn-block" id="startButton">Click here to begin!</button>
+      <div class="container" id="welcomeScreen" style="display:block; margin:auto">
+        <div class="row" >
+          <div class="col-lg-8" style="margin:auto">
+            <div class="card">
+              <!-- Photo by Danial RiCaRoS on Unsplash -->
+              <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="card-img-top" title="Photo by Danial RiCaRoS on Unsplash" alt="Photo by Danial RiCaRoS on Unsplash">
+              <div class="card-body">
+                <h5 class="card-title">Front End Development Quiz</h5>
+                <p class="card-text">Do you think you are ready for a technical interview? Test your HTML, CSS, and JavaScript knowledge!</p>
+                <button type="button" class="btn btn-secondary btn-lg btn-block" id="startButton">Click here to begin!</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="container" id="quizScreen" style="display:none;">
-        <div class="card">
-          <!-- If I have time, I would like to try to include images for each question -->
-          <!-- <img src="" class="card-img-top" alt=""> -->
-          <div class="card-body" style="text-align:center">
-            <!-- replace below title with Question 1, Question 2, etc -->
-            <h5 class="card-title" style="text-align: center; padding: .25em; margin-bottom: .5em; border-bottom: 2px solid darkgray;">Question</h5>
-            <p class="card-text" id="codeQuestion"></p>
-            <div id="answerButtons">
-              <button type="button" class="btn btn-secondary" style="width:50%; margin-top: 1em" id="0"></button>
-              <button type="button" class="btn btn-secondary" style="width:50%; margin-top: 1em" id="1"></button>
-              <button type="button" class="btn btn-secondary" style="width:50%; margin-top: 1em" id="2"></button>
-              <button type="button" class="btn btn-secondary" style="width:50%; margin-top: 1em" id="3"></button>
+        <div class="row">
+          <div class="col-lg-8" style="margin:auto">
+            <div class="card">
+              <!-- If I have time, I would like to try to include images for each question -->
+              <!-- <img src="" class="card-img-top" alt=""> -->
+              <div class="card-body" style="text-align:center">
+                <!-- replace below title with Question 1, Question 2, etc -->
+                <h5 class="card-title" style="text-align: center; padding: .25em; margin-bottom: .5em; border-bottom: 2px solid darkgray;">Question</h5>
+                <p class="card-text" id="codeQuestion"></p>
+                <div id="answerButtons">
+                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="0"></button>
+                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="1"></button>
+                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="2"></button>
+                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="3"></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -55,22 +66,54 @@
 
       <div class="container" id="endOfQuiz" style="display:none; background-color:gray;">
         <div class="card">
-          <div class="card-body" style="text-align:center">
-          <h5 class="card-title" style="text-align:center" id="playerScore"></h5>
-            <form id="highScoreForm">
-              <div class="input-group mb-3" style="width:50%">
-                <!-- need to center textbox -->
-                <input type="text" maxlength="3" class="form-control" id="inputInitials" placeholder="Your Initials" aria-label="Your Initials">
-                <div class="input-group-append">
-                  <button disabled class="btn btn-secondary" type="submit" id="inputInitialsButton">OK</button>
-                </div>
+          <div class="row">
+            <div class="col-lg-8" style="margin:auto">
+  
+              <div class="card-body" style="text-align:center">
+              <h5 class="card-title" style="text-align:center" id="playerScore"></h5>
+              <p>Enter your initials to share your score</p>
+                <form id="highScoreForm">
+                  <div class="input-group mb-3" style="width:200px; margin:auto">
+                    <input type="text" maxlength="3" class="form-control" id="inputInitials" placeholder="Your Initials" aria-label="Your Initials">
+                    <div class="input-group-append">
+                      <button disabled class="btn btn-secondary" type="submit" id="inputInitialsButton">OK</button>
+                    </div>
+                  </div>
+                </form>
+                <button type="button" class="btn btn-success btn-lg" id="playAgain">Play again</button>
+                <button type="button" class="btn btn-secondary btn-lg" id="viewHighScores">View High Scores</button>
               </div>
-            </form>
-            <button type="button" class="btn btn-success btn-lg" id="playAgain">Play again</button>
-            <button type="button" class="btn btn-secondary btn-lg" id="viewHighScores">View High Scores</button>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="container" id="highScoresView" style="display:none">
+        <div class="row">
+          <div class="col-lg-6" style="margin:auto">
+            <div class="card-body">
+
+            <h4 class="card-title" style="text-align:center">Highscores</h4>
+            <table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Initials</th>
+                </tr>
+                <tbody id="highScoreParent">
+
+                </tbody>
+              </thead>
+            </table>
+            <div style="text-align:center; margin-top: 1em">
+            <button class="btn btn-secondary" style="margin-right: .5em" id="back">Back to home</button>
+            <button class="btn btn-danger" style="margin-left:.5em" id="clearLocalStorage">Clear Highscores</button>
+            </div>
+          </div>
+        </div>
+        </div>      
+    </div>
 
     </main>
     <script src="./script.js"></script>
