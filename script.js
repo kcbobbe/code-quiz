@@ -1,33 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 // 04-09 has an example of a countdown
-countdownTimer = document.getElementById("countdown");
-startButton = document.getElementById("startButton");
-welcomeScreen = document.getElementById("welcomeScreen");
-quizScreen = document.getElementById("quizScreen");
+var countdownTimer = document.getElementById("countdown");
+var startButton = document.getElementById("startButton");
+var welcomeScreen = document.getElementById("welcomeScreen");
+var quizScreen = document.getElementById("quizScreen");
 
-flashFeedbackTrue = document.getElementById("flashFeedbackTrue")
-flashFeedbackFalse = document.getElementById("flashFeedbackFalse")
+var flashFeedbackTrue = document.getElementById("flashFeedbackTrue")
+var flashFeedbackFalse = document.getElementById("flashFeedbackFalse")
 
-inputInitials = document.getElementById("inputInitials")
-inputInitialsButton = document.getElementById("inputInitialsButton")
+var inputInitials = document.getElementById("inputInitials")
+var inputInitialsButton = document.getElementById("inputInitialsButton")
+var highScoreForm = document.getElementById("highScoreForm")
 
 
-playAgain = document.getElementById("playAgain")
-viewHighScores = document.getElementById("viewHighScores")
+var playAgain = document.getElementById("playAgain")
+var viewHighScores = document.getElementById("viewHighScores")
 
-endOfQuiz = document.getElementById("endOfQuiz");
-playerScore = document.getElementById("playerScore");
+var endOfQuiz = document.getElementById("endOfQuiz");
+var playerScore = document.getElementById("playerScore");
 
-codeQuestion = document.getElementById("codeQuestion");
-codeAnswer = document.getElementById("answerButtons")
+var codeQuestion = document.getElementById("codeQuestion");
+var codeAnswer = document.getElementById("answerButtons")
 
-questionNum = 0;
-score = 0;
+var questionNum = 0;
+var score = 0;
+var endGame=false
 
-var highscores = []
-localStorage.setItem("highScores", [])
-highScores = localStorage.getItem("highScores")
+if (!localStorage.getItem("highScores")){
+  var highScores = [];
+} else{
+  var highScores = JSON.parse(localStorage.getItem("highScores"))
+  localStorage.setItem("highScores", JSON.stringify(highScores))
+}
+
 
 var questions = [
   {question: "What is my favorite video game?",
@@ -45,8 +51,15 @@ var secondsLeft = 9;
 
 
 function startQuiz(){
+  flashFeedbackFalse.setAttribute("style", "display:none");
+  flashFeedbackTrue.setAttribute("style", "display:none");
+  inputInitials.removeAttribute("disabled");
+
+
+  endGame=false;
   score=0;
   questionNum=0;
+  secondsLeft=9;
   countdownTimer.innerText= "Time Remaining: 10 seconds";
   endOfQuiz.setAttribute("style", "display: none")
   countdown();
@@ -54,43 +67,43 @@ function startQuiz(){
 }
 
 function countdown(){
-
   var countdownInterval = setInterval(function(){
-    countdownTimer.innerText= "Time Remaining: " + secondsLeft + " seconds";
-    
-    if (secondsLeft === 0){
-      countdownTimer.innerText= "Out of time.";
+    if(endGame){
       clearInterval(countdownInterval);
-      quizScreen.setAttribute("style", "display:none");
-      endOfQuiz.setAttribute("style", "display: block")
-      var scorePercent = (Math.floor((score / questions.length) * 100)) 
-      playerScore.innerText = "You ran out of time. Your final score is: " + scorePercent + "%";
-      highScores.push(score);
-      localStorage.setItem("highScores", highScores);
       console.log("ITS OVER");
-      countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
-      clearInterval(countdownInterval);
+      // countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
+    } else {
+      countdownTimer.innerText= "Time Remaining: " + secondsLeft + " seconds";
+      console.log(secondsLeft)
+      if (secondsLeft === 0){
+        countdownTimer.innerText= "Out of time.";
+        clearInterval(countdownInterval);
+        quizScreen.setAttribute("style", "display:none");
+        endOfQuiz.setAttribute("style", "display: block")
+        var scorePercent = (Math.floor((score / questions.length) * 100)) 
+        playerScore.innerText = "You ran out of time. Your final score is: " + scorePercent + "%";
+        // highScores.push(score);
+        // localStorage.setItem("highScores", highScores);
+        clearInterval(countdownInterval);
+      }
+      secondsLeft--;
     }
-    secondsLeft--;
-    // if(questionNum > (questions.length - 1)){
-    //   countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
-    //   clearInterval(countdownInterval);
-    // }
+    
   }, 1000);
 
 }
 
 function flashFeedback(correct){
   if (correct){
-    flashFeedbackTrue.setAttribute("style", "display:block");
     flashFeedbackFalse.setAttribute("style", "display:none");
+    flashFeedbackTrue.setAttribute("style", "display:block");
     setTimeout(function(){
       flashFeedbackTrue.setAttribute("style", "opacity:0");
     }, 1000)
   }
   else {
-    flashFeedbackFalse.setAttribute("style", "display:block");
     flashFeedbackTrue.setAttribute("style", "display:none");
+    flashFeedbackFalse.setAttribute("style", "display:block");
     setTimeout(function(){
       flashFeedbackFalse.setAttribute("style", "opacity:0");
     }, 1000)
@@ -132,9 +145,11 @@ function checkAnswer(e){
         endOfQuiz.setAttribute("style", "display: block")
         var scorePercent = (Math.floor((score / questions.length) * 100)) 
         playerScore.innerText = "Your final score is: " + scorePercent+ "%";
-        highScores.push(scorePercent);
-        localStorage.setItem("highScores", highScores);
-        console.log(score)
+        countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
+        endGame=true;
+        // highScores.push(scorePercent);
+        // localStorage.setItem("highScores", highScores);
+        // console.log(score)
       }
 
     } else {
@@ -148,16 +163,29 @@ function checkAnswer(e){
       }
       else {
         questionNum = questionNum + 1;
+        endGame=true
         quizScreen.setAttribute("style", "display:none");
         endOfQuiz.setAttribute("style", "display: block")
         var scorePercent = (Math.floor((score / questions.length) * 100)) 
         playerScore.innerText = "Your final score is: " + scorePercent + "%";
-        highScores.push(0);
-        localStorage.setItem("highScores", highScores);
+        // highScores.push(scorePercent);
+        // localStorage.setItem("highScores", highScores);
         console.log(highScores)
       }
   }
 } }
+
+function logHighScore(e){
+  e.preventDefault();
+  var scorePercent = (Math.floor((score / questions.length) * 100)) 
+  highScores.push({score:scorePercent,initials: inputInitials.value});
+  localStorage.setItem("highScores",JSON.stringify(highScores))
+  console.log(highScores)
+  inputInitialsButton.setAttribute("disabled","")
+  inputInitials.setAttribute("disabled","")
+  inputInitialsButton.setAttribute("class", "btn-secondary");
+  // inputInitialsButton.removeAttribute("btn-secondary")
+}
   // if (questions[0].answers[i][0]===true){
   //   score = score + 1;
   //   console.log("true");
@@ -167,7 +195,7 @@ function checkAnswer(e){
   // //   displayQuestion()
   // }
 
-  function enterInitials() {
+  function checkInitialsInput() {
     if (inputInitials.value){
       inputInitialsButton.removeAttribute("disabled")
       inputInitialsButton.setAttribute("class", "btn-primary");
@@ -175,12 +203,14 @@ function checkAnswer(e){
     }
   }
 
+highScoreForm.addEventListener('submit', logHighScore)
+
 playAgain.addEventListener("click", startQuiz)
 
 startButton.addEventListener("click", startQuiz)
 // codeAnswerA.addEventListener("click", checkAnswer, 0)
 codeAnswer.addEventListener("click", checkAnswer)
 
-inputInitials.addEventListener("input", enterInitials)
+inputInitials.addEventListener("input", checkInitialsInput)
 
 })
