@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 // 04-09 has an example of a countdown
 countdownTimer = document.getElementById("countdown");
 startButton = document.getElementById("startButton");
@@ -7,10 +9,12 @@ quizScreen = document.getElementById("quizScreen");
 flashFeedbackTrue = document.getElementById("flashFeedbackTrue")
 flashFeedbackFalse = document.getElementById("flashFeedbackFalse")
 
-
+inputInitials = document.getElementById("inputInitials")
+inputInitialsButton = document.getElementById("inputInitialsButton")
 
 
 playAgain = document.getElementById("playAgain")
+viewHighScores = document.getElementById("viewHighScores")
 
 endOfQuiz = document.getElementById("endOfQuiz");
 playerScore = document.getElementById("playerScore");
@@ -36,15 +40,14 @@ var questions = [
 ]
 
 
-var secondsLeft = 60;
+var secondsLeft = 9;
 
 
 
 function startQuiz(){
-  secondsLeft = 60;
   score=0;
   questionNum=0;
-  countdownTimer.innerText= "Time Remaining: 60 seconds";
+  countdownTimer.innerText= "Time Remaining: 10 seconds";
   endOfQuiz.setAttribute("style", "display: none")
   countdown();
   displayQuestion(0);
@@ -54,7 +57,7 @@ function countdown(){
 
   var countdownInterval = setInterval(function(){
     countdownTimer.innerText= "Time Remaining: " + secondsLeft + " seconds";
-    secondsLeft--;
+    
     if (secondsLeft === 0){
       countdownTimer.innerText= "Out of time.";
       clearInterval(countdownInterval);
@@ -65,11 +68,14 @@ function countdown(){
       highScores.push(score);
       localStorage.setItem("highScores", highScores);
       console.log("ITS OVER");
-    }
-    if(questionNum > (questions.length - 1)){
       countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
       clearInterval(countdownInterval);
     }
+    secondsLeft--;
+    // if(questionNum > (questions.length - 1)){
+    //   countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
+    //   clearInterval(countdownInterval);
+    // }
   }, 1000);
 
 }
@@ -161,9 +167,20 @@ function checkAnswer(e){
   // //   displayQuestion()
   // }
 
+  function enterInitials() {
+    if (inputInitials.value){
+      inputInitialsButton.removeAttribute("disabled")
+      inputInitialsButton.setAttribute("class", "btn-primary");
+      inputInitialsButton.removeAttribute("btn-secondary")
+    }
+  }
+
 playAgain.addEventListener("click", startQuiz)
 
 startButton.addEventListener("click", startQuiz)
 // codeAnswerA.addEventListener("click", checkAnswer, 0)
 codeAnswer.addEventListener("click", checkAnswer)
 
+inputInitials.addEventListener("input", enterInitials)
+
+})

@@ -39,10 +39,10 @@
 
       <div class="container" id="endOfQuiz" style="display:none; background-color:gray;">
         <h1 id="playerScore"></h1>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="inputInitials" placeholder="Your Initials" aria-label="Your Initials">
+        <div class="input-group mb-3" style="width:30%">
+          <input type="text" maxlength="3" class="form-control" id="inputInitials" placeholder="Your Initials" aria-label="Your Initials">
           <div class="input-group-append">
-            <button class="btn btn-secondary" type="button" id="inputInitialsButton">OK</button>
+            <button disabled class="btn btn-secondary" type="button" id="inputInitialsButton">OK</button>
           </div>
         </div>
         <button type="button" class="btn btn-success btn-lg" id="playAgain">Play again</button>
