@@ -21,6 +21,7 @@ var viewHighScores = document.getElementById("viewHighScores")
 var endOfQuiz = document.getElementById("endOfQuiz");
 var playerScore = document.getElementById("playerScore");
 
+var questionTitle = document.getElementById("questionTitle")
 var codeQuestion = document.getElementById("codeQuestion");
 var codeAnswer = document.getElementById("answerButtons")
 
@@ -37,6 +38,7 @@ if (!localStorage.getItem("highScores")){
   localStorage.setItem("highScores", JSON.stringify(highScores))
 }
 
+var sortedHighScores = [];
 
 var questions = [
   {question: "Which of the following HTML elements DOES NOT have default styling?",
@@ -129,7 +131,6 @@ function countdown(){
       }
       secondsLeft--;
     }
-    
   }, 1000);
 
 }
@@ -139,14 +140,18 @@ function flashFeedback(correct){
     flashFeedbackFalse.setAttribute("style", "display:none");
     flashFeedbackTrue.setAttribute("style", "display:block");
     setTimeout(function(){
-      flashFeedbackTrue.setAttribute("style", "opacity:0");
+      // flashFeedbackTrue.setAttribute("style", "opacity:0");
+      flashFeedbackTrue.setAttribute("style", "display:none");
+
     }, 1000)
   }
   else {
     flashFeedbackTrue.setAttribute("style", "display:none");
     flashFeedbackFalse.setAttribute("style", "display:block");
     setTimeout(function(){
-      flashFeedbackFalse.setAttribute("style", "opacity:0");
+      // flashFeedbackFalse.setAttribute("style", "opacity:0");
+      flashFeedbackFalse.setAttribute("style", "display: none");
+
     }, 1000)
   }
 }
@@ -156,6 +161,7 @@ function displayQuestion(){
   quizScreen.setAttribute("style", "display:block");
 
   // for (i = 0; i < questions.length; i++){
+    questionTitle.innerText= ("Question " + (questionNum + 1) );
     codeQuestion.innerText = questions[questionNum].question;
     for (i=0; i<codeAnswer.children.length; i++){
       codeAnswer.children[i].innerText = questions[questionNum].answers[i][0];
@@ -224,7 +230,7 @@ function logHighScore(e){
   console.log(highScores)
   inputInitialsButton.setAttribute("disabled","")
   inputInitials.setAttribute("disabled","")
-  inputInitialsButton.setAttribute("class", "btn-secondary");
+  inputInitialsButton.setAttribute("class", "btn btn-secondary");
   // inputInitialsButton.removeAttribute("btn-secondary")
 }
   // if (questions[0].answers[i][0]===true){
@@ -247,6 +253,11 @@ function logHighScore(e){
   function seeHighScores(){
     endOfQuiz.setAttribute("style","display:none");
     highScoresView.setAttribute("style","display: block");
+    // console.log(highScores, "high scores before findMax")
+    // console.log(sortedHighScores, "sorted Array")
+    // findMax(highScores);
+    // console.log(highScores, "high scores after find max")
+    // console.log(sortedHighScores, "sorted array after find max")
     // for (i = 0; i < highScoreParent.childNodes.length; i++){
     //   highScoreParent.removeChild(highScoreParent.childNodes[i]);
     // }
@@ -255,7 +266,7 @@ function logHighScore(e){
       // console.log(highScores[i])
       var newTableRow= document.createElement('tr');
       var newRankingCell = document.createElement('th');
-      newRankingCell.innerText = i;
+      newRankingCell.innerText = i+1;
       var newScoreCell = document.createElement('td');
       var newScoreCellText = document.createTextNode(highScores[i].score);
       newScoreCell.appendChild(newScoreCellText)
@@ -266,6 +277,33 @@ function logHighScore(e){
       newTableRow.appendChild(newScoreCell);
       newTableRow.appendChild(newInitialsCell);
 
+    }
+  }
+
+  // function orderHighScores(){
+  //   for (i=0; i < highScores.length; i++){
+  //     findMax(highScore[i])
+  //   }
+    
+
+  //   }
+
+
+  function findMax(scoreArray){
+    var max = [0, 0]
+    for (i=0; i <= scoreArray.length; i++){
+      if (scoreArray[i].score > max[0]){
+        max = [scoreArray[i].score, i]
+        console.log(max, "max")
+      }
+    }
+    var topScore = (scoreArray.splice(max[1], 1))
+    console.log(topScore, "here is the calculated top score...")
+    sortedHighScores.push(topScore[0])
+    if (scoreArray.length > 0){
+      findMax(scoreArray);
+    } else {
+      highScores =  sortedHighScores;
     }
   }
 
