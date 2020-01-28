@@ -82,7 +82,7 @@ var back = document.getElementById("back");
 var questionNum = 0;
 var score = 0;
 var endGame=false
-var secondsLeft = 59;
+var secondsLeft = questions.length * 15;
 
 if (!localStorage.getItem("highScores")){
   var highScores = [];
@@ -100,8 +100,8 @@ function startQuiz(){
   endGame=false;
   score=0;
   questionNum=0;
-  secondsLeft=59;
-  countdownTimer.innerText= "Time Remaining: 60 seconds";
+  secondsLeft= questions.length * 15;
+  countdownTimer.innerText= "Time Remaining: " + secondsLeft + " seconds";
   endOfQuiz.setAttribute("style", "display: none")
   countdown();
   displayQuestion(0);
@@ -185,6 +185,7 @@ function checkAnswer(e){
     } else {
       console.log("false")
       
+      secondsLeft = secondsLeft - 10;
       flashFeedback(false);
 
       if (questionNum < (questions.length - 1)) {
@@ -218,7 +219,7 @@ function logHighScore(e){
   function checkInitialsInput() {
     if (inputInitials.value){
       inputInitialsButton.removeAttribute("disabled")
-      inputInitialsButton.setAttribute("class", "btn-primary");
+      inputInitialsButton.setAttribute("class", "btn btn-primary");
       inputInitialsButton.removeAttribute("btn-secondary")
     }
   }
@@ -261,7 +262,8 @@ function logHighScore(e){
 
   //Reseting quiz and showing home page view
   function backToMain(){
-    countdownTimer.innerText= "Time Remaining: 60 seconds";
+    // countdownTimer.innerText= "Time Remaining: " + (questions.length * 15) + " seconds";
+    countdownTimer.innerText= "";
     highScoresView.setAttribute("style","display:none");
     welcomeScreen.setAttribute("style", "display:block");
   }

@@ -5,27 +5,28 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <main>
 
-      <header style="margin-bottom: 1em">
-        <nav class= "navbar navbar-light" style="border-bottom:3px solid darkgray; background-color: #eeeeee">
-          <h1>Code Quiz</h1>
-          <div id="countdown" class="text-align:right">Time Remaining: 60 seconds</div>
+      <heaader style="margin-bottom: 1em">
+        <nav class= "navbar navbar-light">
+          <a href="index.html" class="navbar-brand">Code Quiz</a>
+          <div id="countdown" class="navbar-text text-align:right"></div>
         </nav>
-        <div style="height:50px;">
-          <div class="alert alert-success" id="flashFeedbackTrue" style="display:none" role="alert">
+        <div class="alert-container">
+          <div class="alert alert-success" id="flashFeedbackTrue" role="alert">
             You were right!
           </div>
-          <div class="alert alert-danger" id="flashFeedbackFalse" style="display:none" role="alert">
+          <div class="alert alert-danger" id="flashFeedbackFalse" role="alert">
             You were wrong!
           </div>
         </div>
         
-      </header>
+      </heaader>
 
-      <div class="container" id="welcomeScreen" style="display:block; margin:auto">
+      <div class="container welcome-screen-view" id="welcomeScreen">
         <div class="row" >
           <div class="col-lg-8" style="margin:auto">
             <div class="card">
@@ -41,7 +42,7 @@
         </div>
       </div>
 
-      <div class="container" id="quizScreen" style="display:none;">
+      <div class="container quiz-screen-view" id="quizScreen">
         <div class="row">
           <div class="col-lg-8" style="margin:auto">
             <div class="card">
@@ -49,13 +50,13 @@
               <!-- <img src="" class="card-img-top" alt=""> -->
               <div class="card-body" style="text-align:center">
                 <!-- replace below title with Question 1, Question 2, etc -->
-                <h5 class="card-title" id="questionTitle" style="text-align: center; padding: .25em; margin-bottom: .5em; border-bottom: 2px solid darkgray;">Question</h5>
+                <h5 class="card-title question-title" id="questionTitle">Question</h5>
                 <p class="card-text" id="codeQuestion"></p>
-                <div id="answerButtons">
-                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="0"></button>
-                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="1"></button>
-                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="2"></button>
-                  <button type="button" class="btn btn-secondary btn-block" style="margin-top: 1em" id="3"></button>
+                <div class="answer-buttons" id="answerButtons">
+                  <button type="button" class="btn btn-secondary btn-block" id="0"></button>
+                  <button type="button" class="btn btn-secondary btn-block" id="1"></button>
+                  <button type="button" class="btn btn-secondary btn-block" id="2"></button>
+                  <button type="button" class="btn btn-secondary btn-block" id="3"></button>
                 </div>
               </div>
             </div>
@@ -64,7 +65,7 @@
       </div>
 
 
-      <div class="container" id="endOfQuiz" style="display:none; background-color:gray;">
+      <div class="container end-quiz-view" id="endOfQuiz">
         <div class="card">
           <div class="row">
             <div class="col-lg-8" style="margin:auto">
@@ -73,27 +74,27 @@
               <h5 class="card-title" style="text-align:center" id="playerScore"></h5>
               <p>Enter your initials to share your score</p>
                 <form id="highScoreForm">
-                  <div class="input-group" style="width:200px; margin: 2em auto">
+                  <div class="input-group initials-input">
                     <input type="text" maxlength="3" class="form-control" id="inputInitials" placeholder="Your Initials" aria-label="Your Initials">
                     <div class="input-group-append">
                       <button disabled class="btn btn-secondary" type="submit" id="inputInitialsButton">OK</button>
                     </div>
                   </div>
                 </form>
-                <button type="button" class="btn btn-dark" style="margin-right: .5em" id="playAgain">Play again</button>
-                <button type="button" class="btn btn-secondary" style="margin-left: .5em" id="viewHighScores">View High Scores</button>
+                <button type="button" class="btn btn-dark btn-play-again" style="margin-right: .5em" id="playAgain">Play again</button>
+                <button type="button" class="btn btn-secondary btn-view-high-scores" id="viewHighScores">View High Scores</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="container" id="highScoresView" style="display:none">
+      <div class="container high-scores-view" id="highScoresView" style="display:none">
         <div class="row">
           <div class="col-lg-6" style="margin:auto">
             <div class="card-body">
 
-            <h4 class="card-title" style="text-align:center">Highscores</h4>
+            <h4 class="card-title" style="text-align:center">High Scores</h4>
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
@@ -108,7 +109,7 @@
             </table>
             <div style="text-align:center; margin-top: 1em">
             <button class="btn btn-secondary" style="margin-right: .5em" id="back">Back to home</button>
-            <button class="btn btn-danger" style="margin-left:.5em" id="clearLocalStorage">Clear Highscores</button>
+            <button class="btn btn-danger" style="margin-left:.5em" id="clearLocalStorage">Clear High Scores</button>
             </div>
           </div>
         </div>
