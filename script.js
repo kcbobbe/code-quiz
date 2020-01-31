@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ["To store some information or preferences in the user's browser that will be saved even if the page is refreshed.", true], 
       ["To store documents and downloads on your device.", false]]}
   ]
-
+  
 var countdownTimer = document.getElementById("countdown");
 var startButton = document.getElementById("startButton");
 var welcomeScreen = document.getElementById("welcomeScreen");
@@ -70,6 +70,8 @@ var endOfQuiz = document.getElementById("endOfQuiz");
 
 // message showing the player's score
 var playerScore = document.getElementById("playerScore");
+//message showing details about the player's score
+var playerScoreDetail = document.getElementById("playerScoreDetail");
 //Text for Question 1, Question 2, etc
 var questionTitle = document.getElementById("questionTitle")
 //text for questions
@@ -114,14 +116,15 @@ function countdown(){
       countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
     } else {
       countdownTimer.innerText= "Time Remaining: " + secondsLeft + " seconds";
-      console.log(secondsLeft)
       if (secondsLeft === 0){
         countdownTimer.innerText= "Out of time.";
         clearInterval(countdownInterval);
         quizScreen.setAttribute("style", "display:none");
         endOfQuiz.setAttribute("style", "display: block")
         var scorePercent = (Math.floor((score / questions.length) * 100)) 
-        playerScore.innerText = "You ran out of time. Your final score is: " + scorePercent + "%";
+        var adjustedTimeScore = Math.round(scorePercent/2);
+        playerScore.innerText = "You ran out of time. Your final score is: " + adjustedTimeScore + " points.";
+        playerScoreDetail.innerText = "You answered " + scorePercent + "% of the questions correctly."
         clearInterval(countdownInterval);
       }
       secondsLeft--;
@@ -163,7 +166,6 @@ function checkAnswer(e){
   event.preventDefault();
   if(e.target.matches("button")){
     if(questions[questionNum].answers[e.target.id][1]===true){
-      console.log("true");
       score = score + 1;
 
       flashFeedback(true);
@@ -177,13 +179,14 @@ function checkAnswer(e){
         quizScreen.setAttribute("style", "display:none");
         endOfQuiz.setAttribute("style", "display: block")
         var scorePercent = (Math.floor((score / questions.length) * 100)) 
-        playerScore.innerText = "Your final score is: " + scorePercent+ "%";
+        var adjustedTimeScore = Math.round(scorePercent + (secondsLeft / (questions.length/1.5)));
+        playerScore.innerText = "Your final score is: " + adjustedTimeScore+ " points";
+        playerScoreDetail.innerText = "You answered " + scorePercent + "% of the questions correctly."
         countdownTimer.innerText= "Clear time: " + secondsLeft + " seconds";
         endGame=true;
       }
 
     } else {
-      console.log("false")
       
       secondsLeft = secondsLeft - 10;
       flashFeedback(false);
@@ -198,8 +201,10 @@ function checkAnswer(e){
         quizScreen.setAttribute("style", "display:none");
         endOfQuiz.setAttribute("style", "display: block")
         var scorePercent = (Math.floor((score / questions.length) * 100)) 
-        playerScore.innerText = "Your final score is: " + scorePercent + "%";
-        console.log(highScores)
+        var adjustedTimeScore = Math.round(scorePercent + (secondsLeft / (questions.length/1.5)));
+        playerScore.innerText = "Your final score is: " + adjustedTimeScore + " points";
+        playerScoreDetail.innerText = "You answered " + scorePercent + "% of the questions correctly."
+
       }
   }
 } }
@@ -207,7 +212,8 @@ function checkAnswer(e){
 function logHighScore(e){
   e.preventDefault();
   var scorePercent = (Math.floor((score / questions.length) * 100)) 
-  highScores.push({score:scorePercent,initials: inputInitials.value});
+  var adjustedTimeScore = Math.round(scorePercent + (secondsLeft / (questions.length/1.5)));
+  highScores.push({score:adjustedTimeScore,initials: inputInitials.value});
   highScores = highScores.sort(compare);
   localStorage.setItem("highScores",JSON.stringify(highScores))
   inputInitialsButton.setAttribute("disabled","")
@@ -229,7 +235,6 @@ function logHighScore(e){
     highScoresView.setAttribute("style","display: block");
     highScoreParent.innerHTML = "";
     for (var i = 0; i < highScores.length; i++){
-      // console.log(highScores[i])
       var newTableRow= document.createElement('tr');
       var newRankingCell = document.createElement('th');
       newRankingCell.innerText = i+1;

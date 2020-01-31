@@ -18,8 +18,9 @@ This web application was created using HTML, CSS, JavaScript and Bootstrap. The 
 ## Usage 
 1. First, click on the "Click here to begin!" button to start the quiz. This will start the countdown timer and show the first question.
 2. Next, read the question and each of the answers below. Click on the best answer for the question. The next question will display, and a banner at the top of the page will give you feedback on your answer.
-3. After answering all of the questions, the countdown will stop and you will be presented with your score. You have the option of entering your initials to add your score to the high scores list. You can click the "Play Again" button to try the quiz again, or click the "View high scores" button to the a list of scores.
-4. If the counter runs out before you finish the quiz, the quiz will end and you will be only given points for the questions you were able to complete.
+3. After answering all of the questions, the countdown will stop and you will be presented with your score. The score is a number out of 100 that is calculated using your accuracy and speed of quiz completion.
+4. You have the option of entering your initials to add your score to the high scores list. You can click the "Play Again" button to try the quiz again, or click the "View high scores" button to the a list of scores.
+5. If the counter runs out before you finish the quiz, the quiz will end and you will be only given points for the questions you were able to complete.
 
 ## Key Features
 
@@ -30,14 +31,16 @@ Another feature of this application is the ability to log your score and initial
 Finally, the questions and answers of the quiz are stored in an object. The questions and answers are dynamically added to the page, and not hard coded. Questions and answers can easily be adjusted and added by modifying the object. No need to change any of the other code or HTML. 
 
 ## Future Improvements
-1. Make the high scores list in order of high to low score
+<del>1. Make the high scores list in order of high to low score</del> Already completed
 2. Add a progress bar to show how much of the quiz has been completed. This will give the user an idea of how to pace themselves thoughout the quiz.
 3. Add a 'skip' button that allows the user to skip the question and come back to it if they have time at the end.
 4. Add the option for selecting different which types of questions to include on the quiz. For example, a user would be able to select HTML and CSS questions but leave JavaScript questions unselected.
-5. Change the timer based on the total number of questions. For example, allocate 10 seconds per question.
+<del>5. Change the timer based on the total number of questions. For example, allocate 10 seconds per question.</del> Already completed
 
 ## Credits
-
+https://getbootstrap.com/
+Front page photo by Danial RiCaRoS on Unsplash
+https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
 
 ## License
 MIT License
