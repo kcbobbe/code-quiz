@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./script.js"></script>
   </head>
   <body>
     <main>
@@ -34,7 +35,7 @@
               <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="card-img-top" title="Photo by Danial RiCaRoS on Unsplash" alt="Photo by Danial RiCaRoS on Unsplash">
               <div class="card-body">
                 <h5 class="card-title">Front End Development Quiz</h5>
-                <p class="card-text">Do you think you are ready for a technical interview? Test your HTML, CSS, and JavaScript knowledge!</p>
+                <p class="card-text">Do you think you are ready for a technical interview? Test your HTML, CSS, and JavaScript knowledge! This is a timed quiz. You will be given a time penalty for incorrect answers. Your final score will will be calculated by how quickly and accurately you complete the quiz.</p>
                 <button type="button" class="btn btn-secondary btn-lg btn-block" id="startButton">Click here to begin!</button>
               </div>
             </div>
@@ -46,10 +47,7 @@
         <div class="row">
           <div class="col-lg-8" style="margin:auto">
             <div class="card">
-              <!-- If I have time, I would like to try to include images for each question -->
-              <!-- <img src="" class="card-img-top" alt=""> -->
               <div class="card-body" style="text-align:center">
-                <!-- replace below title with Question 1, Question 2, etc -->
                 <h5 class="card-title question-title" id="questionTitle">Question</h5>
                 <p class="card-text" id="codeQuestion"></p>
                 <div class="answer-buttons" id="answerButtons">
@@ -72,6 +70,7 @@
   
               <div class="card-body" style="text-align:center">
               <h5 class="card-title" style="text-align:center" id="playerScore"></h5>
+              <div class="card-text" style="text-align:center" id="playerScoreDetail"></div>
               <p>Enter your initials to share your score</p>
                 <form id="highScoreForm">
                   <div class="input-group initials-input">
@@ -117,6 +116,5 @@
     </div>
 
     </main>
-    <script src="./script.js"></script>
   </body>
 </html>
