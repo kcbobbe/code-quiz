@@ -31,15 +31,17 @@ Another feature of this application is the ability to log your score and initial
 Finally, the questions and answers of the quiz are stored in an object. The questions and answers are dynamically added to the page, and not hard coded. Questions and answers can easily be adjusted and added by modifying the object. No need to change any of the other code or HTML. 
 
 ## Future Improvements
-<del>1. Make the high scores list in order of high to low score</del> Already completed
+1. <del>Make the high scores list in order of high to low score</del> Already completed
 2. Add a progress bar to show how much of the quiz has been completed. This will give the user an idea of how to pace themselves thoughout the quiz.
 3. Add a 'skip' button that allows the user to skip the question and come back to it if they have time at the end.
 4. Add the option for selecting different which types of questions to include on the quiz. For example, a user would be able to select HTML and CSS questions but leave JavaScript questions unselected.
-<del>5. Change the timer based on the total number of questions. For example, allocate 10 seconds per question.</del> Already completed
+5. <del>Change the timer based on the total number of questions. For example, allocate 10 seconds per question.</del> Already completed
 
 ## Credits
 https://getbootstrap.com/
+
 Front page photo by Danial RiCaRoS on Unsplash
+
 https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
 
 ## License
